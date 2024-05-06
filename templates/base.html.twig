@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Web Summer Camp Chatbot{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="{{ block('body_class') }}">
+        <nav class="navbar bg-white shadow-lg navbar-expand">
+            <div class="container">
+                <span class="navbar-brand ms-2">
+                    <img src="{{ asset('favicon.png') }}" alt="Web Summer Camp Chatbot" height="32" class="me-2">
+                    Custom Bot Workshop
+                </span>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto me-2 mb-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('chatbot') }}">{{ ux_icon('fluent:bot-24-filled', { height: '20px', width: '20px' }) }} Web Summer Camp Bot</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container pt-5">
+            {% block content %}{% endblock %}
+            <footer class="mt-2 text-center">
+                <span class="text-white">
+                    Build by <a href="https://christopher-hertel.de" class="text-white" target="_blank">Christopher Hertel</a>
+                    for <a href="https://websummercamp.com/" class="text-white" target="_blank">Web Summer Camp 2024</a>.
+                </span>
+            </footer>
+        </div>
+    </body>
+</html>

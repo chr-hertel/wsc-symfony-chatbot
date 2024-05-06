@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+. $(dirname "$0")/helpers.sh
+start
+
+headline "Linting"
+docker_php php -l src/*.php src/**/*.php
+docker_php bin/console lint:yaml config --parse-tags
+docker_php bin/console lint:twig templates
+docker_php bin/console lint:container
+
+headline "Code Style"
+docker_php vendor/bin/php-cs-fixer fix
+
+headline "PHPStan"
+docker_php vendor/bin/phpstan analyse
+
+headline "Open AI"
+docker_php bin/console app:test:openai
+
+headline "PHPUnit"
+docker_php rm -rf var/cache/test
+docker_php vendor/bin/phpunit
+
+end
