@@ -23,3 +23,15 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+when@test:
+    services:
+        Symfony\Component\HttpClient\MockHttpClient:
+            factory: ['App\Tests\HttpClientFactory', 'createMock']
+
+        TraceableHttpClient:
+            class: Symfony\Component\HttpClient\TraceableHttpClient
+            decorates: Symfony\Contracts\HttpClient\HttpClientInterface
+            arguments: ['@TraceableHttpClient.inner']
+
+        Symfony\Contracts\HttpClient\HttpClientInterface: '@Symfony\Component\HttpClient\MockHttpClient'
