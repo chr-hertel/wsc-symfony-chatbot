@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\OpenAI\GptClientInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class Chat
@@ -12,6 +13,7 @@ final class Chat
 
     public function __construct(
         private readonly RequestStack $requestStack,
+        private readonly GptClientInterface $gptClient,
     ) {
     }
 
@@ -28,8 +30,7 @@ final class Chat
         $messages = $this->loadMessages();
 
         $messages[] = ['role' => 'user', 'content' => $message];
-        sleep(1); // Simulate GPT API call
-        $response = 'This is not a clever response.'; // TODO: Replace with GptClient call
+        $response = $this->gptClient->generateResponse($messages);
         $messages[] = ['role' => 'assistant', 'content' => $response];
 
         $this->saveMessages($messages);
