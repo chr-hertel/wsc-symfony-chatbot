@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\OpenAI;
 
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+#[AsAlias(GptClientInterface::class)]
 class GptClient implements GptClientInterface
 {
     public function __construct(
