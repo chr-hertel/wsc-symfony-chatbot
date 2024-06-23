@@ -7,7 +7,7 @@ namespace App\OpenAI;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\Filesystem\Filesystem;
 
-#[AsDecorator(decorates: GptClientInterface::class, priority: 10)]
+// #[AsDecorator(decorates: GptClientInterface::class, priority: 10)]
 final class ProgramAwareClient implements GptClientInterface
 {
     public function __construct(
