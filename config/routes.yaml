@@ -3,3 +3,9 @@ chatbot:
     controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController'
     defaults:
         template:  'index.html.twig'
+
+youtube:
+    path: '/youtube'
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController'
+    defaults:
+        template:  'youtube.html.twig'
