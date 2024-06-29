@@ -9,3 +9,9 @@ youtube:
     controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController'
     defaults:
         template:  'youtube.html.twig'
+
+wikipedia:
+    path: '/wikipedia'
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController'
+    defaults:
+        template:  'wikipedia.html.twig'
