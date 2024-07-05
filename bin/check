@@ -18,6 +18,9 @@ docker_php vendor/bin/phpstan analyse
 headline "Open AI"
 docker_php bin/console app:test:openai
 
+headline "Chroma DB"
+docker_php bin/console app:test:chroma
+
 headline "PHPUnit"
 docker_php rm -rf var/cache/test
 docker_php vendor/bin/phpunit
