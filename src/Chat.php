@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\OpenAI\GptClient;
+use App\OpenAI\GptClientInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class Chat
@@ -13,7 +13,7 @@ final class Chat
 
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly GptClient $gptClient,
+        private readonly GptClientInterface $gptClient,
     ) {
     }
 
