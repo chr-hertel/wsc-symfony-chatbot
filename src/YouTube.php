@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\OpenAI\GptClientInterface;
 use App\YouTube\TranscriptFetcher;
-use PhpLlm\LlmChain\ChatChain;
+use PhpLlm\LlmChain\Chat;
 use PhpLlm\LlmChain\Message\Message;
 use PhpLlm\LlmChain\Message\MessageBag;
-use PhpLlm\LlmChain\ToolChain;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class YouTube
@@ -18,7 +16,7 @@ final class YouTube
 
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly ChatChain $toolChain,
+        private readonly Chat $toolChain,
         private readonly TranscriptFetcher $transcriptFetcher,
     ) {
     }
@@ -52,10 +50,8 @@ final class YouTube
     {
         $messages = $this->loadMessages();
 
-        $message = Message::ofUser($message);
-        $response = $this->toolChain->call($message, $messages);
-
-        $messages[] = $message;
+        $messages[] = Message::ofUser($message);
+        $response = $this->toolChain->call($messages);
         $messages[] = Message::ofAssistant($response);
 
         $this->saveMessages($messages);

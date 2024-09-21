@@ -31,10 +31,8 @@ final class Wikipedia
     {
         $messages = $this->loadMessages();
 
-        $message = Message::ofUser($message);
-        $response = $this->toolChain->call($message, $messages);
-
-        $messages[] = $message;
+        $messages[] = Message::ofUser($message);
+        $response = $this->toolChain->call($messages);
         $messages[] = Message::ofAssistant($response);
 
         $this->saveMessages($messages);
